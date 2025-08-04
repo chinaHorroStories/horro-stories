@@ -28,7 +28,7 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |
-          if [ -f "${{ github.workspace }}/bun.lockb" ]; then
+          if [ -f "${{ github.workspace }}/bun.lock" ]; then
             echo "manager=bun" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=bun" >> $GITHUB_OUTPUT
@@ -70,9 +70,9 @@ jobs:
           path: |
             .next/cache
             node_modules/.cache
-          key: ${{ runner.os }}-nextjs15-${{ hashFiles('**/package-lock.json', '**/yarn.lock', '**/bun.lockb') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx', '**/*.css') }}
+          key: ${{ runner.os }}-nextjs15-${{ hashFiles('**/package-lock.json', '**/yarn.lock', '**/bun.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx', '**/*.css') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs15-${{ hashFiles('**/package-lock.json', '**/yarn.lock', '**/bun.lockb') }}-
+            ${{ runner.os }}-nextjs15-${{ hashFiles('**/package-lock.json', '**/yarn.lock', '**/bun.lock') }}-
 
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
